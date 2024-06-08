@@ -39,7 +39,7 @@ namespace ASPNetCoreWebAPI.Data
 
         public IEnumerable<Book> ListBooks()
         {
-            var books = _context.Books.ToList();
+            var books = GetAll().ToList(); 
             return books;
         }
 
@@ -70,5 +70,34 @@ namespace ASPNetCoreWebAPI.Data
             entity.State = EntityState.Modified;
             return book;
         }
+
+        public IQueryable<Book> GetAll()
+        {
+            return _context.Books.AsQueryable();
+        }
+
+        public IEnumerable<Book> Search(string keyword)
+        {
+            keyword = keyword.ToLower();
+            return GetAll().Where(b => 
+            b.Author.ToLower() == keyword || 
+            b.Publisher.ToLower() == keyword || 
+            b.Title.ToLower() == keyword || 
+            b.ISBN.ToLower() == keyword || 
+            b.Description.ToLower() == keyword ||
+            b.Author.ToLower().Contains(keyword) ||
+            b.Publisher.ToLower().Contains(keyword) ||
+            b.Title.ToLower().Contains(keyword) ||
+            b.ISBN.ToLower().Contains(keyword) ||
+            b.Description.ToLower().Contains(keyword));
+        
+        }
+
+        public Task<IEnumerable<Book>> ListBooksAsync(string keyword)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

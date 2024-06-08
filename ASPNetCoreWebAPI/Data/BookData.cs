@@ -77,6 +77,11 @@ namespace ASPNetCoreWebAPI.Data
             throw new NotImplementedException();
         }
 
+        public Task<IEnumerable<Book>> ListBooksAsync(string keyword)
+        {
+            throw new NotImplementedException();
+        }
+
         public int Save()
         {
             throw new NotImplementedException();
@@ -87,9 +92,16 @@ namespace ASPNetCoreWebAPI.Data
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Book> Search(string keyword)
+        {
+            throw new NotImplementedException();
+        }
+
         public Book UpdateBook(Book book)
         {
             throw new NotImplementedException();
         }
+
+     
     }
 }
