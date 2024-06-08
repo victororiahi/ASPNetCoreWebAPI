@@ -184,6 +184,23 @@ namespace ASPNetCoreWebAPI.Controllers
 
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
+     
+        
+        }
+
+        [HttpGet("search-books/{keyword}")]
+        public IActionResult SearchBooks([FromRoute] string keyword)
+        {
+            try
+            {
+                var books = _bookService.Search(keyword);
+                return Ok(books);
+            }
+
+            catch (Exception ex) 
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
     }
 }
